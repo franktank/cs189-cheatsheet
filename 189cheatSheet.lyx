@@ -30,6 +30,12 @@
 
 \let\textquotedbl="
 \def\ci{\perp\!\!\!\perp}
+
+\raggedright
+
+\newcommand{\mytitle}[1]{
+  \begin{center}\large{\underline{#1}}\end{center}
+}
 \end_preamble
 \options 3pt
 \use_default_options false
@@ -111,26 +117,33 @@ status open
 
 \backslash
 begin{multicols}{3}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{center}
-\backslash
-Large{
-\backslash
-underline{CS 189 Final Note Sheet}}
-\backslash
-end{center}
-\end_layout
-
-\begin_layout Plain Layout
-
-
 \backslash
 footnotesize
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+mytitle{CS 189 Final Note Sheet}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}Rishi Sharma and Peter Gao
+\backslash
+end{center}
 \end_layout
 
 \end_inset
@@ -147,15 +160,24 @@ Bayes Rule:
 \begin_inset Formula $P(\omega|x)=\frac{P(x|\omega)P(\omega)}{P(x)},P(x)=\sum_{i}P(x|\omega_{i})P(\omega_{i})$
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula $P(x,w)=P(x|w)P(w)=P(w|x)P(x)$
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula $P(error)=\int_{-\infty}^{\infty}P(error|x)P(x)dx$
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula $P(error|x)=\left\{ \begin{array}{lr}
 P(\omega_{1}|x) & \text{ if we decide }\omega_{2}\\
 P(\omega_{2}|x) & \text{ if we decide }\omega_{1}
@@ -166,7 +188,8 @@ P(\omega_{2}|x) & \text{ if we decide }\omega_{1}
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\text{0-1 Loss:\ }\lambda(\alpha_{i}|\omega_{j})=\left\{ \begin{array}{lr}
+0-1 Loss: 
+\begin_inset Formula $\lambda(\alpha_{i}|\omega_{j})=\left\{ \begin{array}{lr}
 0 & i=j\text{\ (correct)}\\
 1 & i\not=j\text{\ (mismatch)}
 \end{array}\right.$
@@ -176,14 +199,64 @@ P(\omega_{2}|x) & \text{ if we decide }\omega_{1}
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\text{Expected Loss (Risk):\ }R(\alpha_{i}|x)=\sum_{j=1}^{c}\lambda(\alpha_{i}|\omega_{j})P(\omega_{j}|x)$
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Expected Loss (Risk)
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+: 
+\begin_inset Formula $R(\alpha_{i}|x)=\sum_{j=1}^{c}\lambda(\alpha_{i}|\omega_{j})P(\omega_{j}|x)$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\text{0-1 Risk:\ }R(\alpha_{i}|x)=\sum_{j\not=i}^{c}P(\omega_{j}|x)=1-P(\omega_{i}|x)$
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0-1 Risk:
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Formula $R(\alpha_{i}|x)=\sum_{j\not=i}^{c}P(\omega_{j}|x)=1-P(\omega_{i}|x)$
 \end_inset
 
 
@@ -198,10 +271,10 @@ Probabilistic Motivation for Least Squares
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
- Note: The intercept term 
+\begin_layout Standard
+Note: The intercept term 
 \begin_inset Formula $x_{0}=1$
 \end_inset
 
@@ -209,19 +282,35 @@ Probabilistic Motivation for Least Squares
 \begin_inset Formula $\theta$
 \end_inset
 
- 
+
+\begin_inset Newline newline
+\end_inset
+
+
 \begin_inset Formula $\implies p(y^{(i)}|x^{(i)};\theta)=\frac{1}{\sqrt{2\pi\sigma^{2}}}\exp\left(-\frac{(y^{(i)}-\theta^{\intercal}x^{(i)})^{2}}{2\sigma^{2}}\right)$
 \end_inset
 
- 
+
+\begin_inset Newline newline
+\end_inset
+
+
 \begin_inset Formula $\implies L(\theta)=\prod_{i=1}^{m}\frac{1}{\sqrt{2\pi\sigma^{2}}}\exp\left(-\frac{(y^{(i)}-\theta^{\intercal}x^{(i)})^{2}}{2\sigma^{2}}\right)$
 \end_inset
 
- 
+
+\begin_inset Newline newline
+\end_inset
+
+
 \begin_inset Formula $\implies l(\theta)=m\log\frac{1}{\sqrt{2\pi\sigma^{2}}}-\frac{1}{2\sigma^{2}}\sum_{i=1}^{m}(y^{(i)}-\theta^{\intercal}x^{(i)})^{2}$
 \end_inset
 
- 
+
+\begin_inset Newline newline
+\end_inset
+
+
 \begin_inset Formula $\implies\max_{\theta}l(\theta)\equiv\min_{\theta}\sum_{i=1}^{m}(y^{(i)}-h_{\theta}(x))^{2}$
 \end_inset
 
@@ -240,7 +329,10 @@ gives us least squares
 \begin_inset Formula $min_{\theta}||X\theta-y||_{2}^{2}\equiv\min_{\theta}\theta^{\intercal}X^{\intercal}X\theta-2\theta^{\intercal}X^{\intercal}y+y^{\intercal}Y$
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula $\nabla_{\theta}l(\theta)=X^{\intercal}X\theta-X^{\intercal}y=0\implies\boxed{\theta^{*}=(X^{\intercal}X)^{-1}X^{\intercal}y}$
 \end_inset
 
@@ -260,14 +352,39 @@ Least Squares Solution
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\min_{x}||Ax-y||_{2}^{2}\implies x^{*}=A^{\dagger}y\text{\ min norm sol'n}$
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Min norm soln:
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Formula $\min_{x}||Ax-y||_{2}^{2}\implies x^{*}=A^{\dagger}y$
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
- Sol'n set: 
+\begin_layout Standard
+Soln set: 
 \begin_inset Formula $x_{0}+N(A)=x^{*}+N(A)$
 \end_inset
 
@@ -320,19 +437,31 @@ Model
 \begin_inset Formula $\frac{dh_{\theta}}{d\theta}=(\frac{1}{1+e^{\theta^{T}x}})^{2}e^{-\theta^{T}x}=\frac{1}{1+e^{\theta^{T}x}}\left(1-\frac{1}{1+e^{-\theta^{T}x}}\right)=h_{\theta}(1-h_{\theta})$
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula $p(y|x;\theta)=(h_{\theta}(x))^{y}(1-h_{\theta}(x))^{1-y}\implies$
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula $L(\theta)=\prod_{i=1}^{m}(h_{\theta}(x^{(i)}))^{y^{(i)}}(1-h_{\theta}(x^{(i)}))^{1-y^{(i)}}\implies$
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula $l(\theta)=\sum_{i=1}^{m}y^{(i)}\log(h_{\theta}(x^{(i)}))+(1-y^{(i)})\log(1-h_{\theta}(x^{(i)}))\implies$
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula $\nabla_{\theta}l=\sum_{i}(y^{(i)}-h_{\theta}(x^{(i)}))x^{(i)}=X^{\intercal}(y-h_{\theta}(X))$
 \end_inset
 
@@ -368,18 +497,27 @@ Multivariate Gaussian
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $f(x;\mu,\Sigma)=\frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}exp\left(-\frac{1}{2}(x-\mu)^{T}\Sigma^{-1}(x-\mu)\right)$
+\begin_inset Formula $f(x;\mu,\Sigma)=\frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}\exp\left(-\frac{1}{2}(x-\mu)^{T}\Sigma^{-1}(x-\mu)\right)$
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula $\Sigma=E[(X-\mu)(X-\mu)^{T}]=E[XX^{T}]-\mu\mu^{T}$
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula $\Sigma\text{ is PSD}\implies x^{T}\Sigma x\ge0\text{, if inverse exists }\Sigma\text{ must be PD}$
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula $\text{If }X\sim N(\mu,\Sigma),\ \text{then}\ AX+b\sim N(A\mu+b,A\Sigma A^{T})$
 \end_inset
 
@@ -434,7 +572,7 @@ The distribution is the result of a linear transformation of a vector of
 \begin_inset Formula $\implies$
 \end_inset
 
- 
+
 \begin_inset Formula 
 \[
 \text{\ensuremath{c}-level set of \ensuremath{f}}\propto\{x:x^{\intercal}\Sigma^{-1}x=c\}
@@ -479,26 +617,28 @@ Classify
 \begin_inset Formula $p(y)=\phi^{y}\phi^{1-y}$
 \end_inset
 
- and 
-\begin_inset Formula $p(x|y=1;\mu_{1})=\frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}exp\left(-\frac{1}{2}(x-\mu_{1})^{T}\Sigma^{-1}(x-\mu_{1})\right)$
-\end_inset
-
-
+ and
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula $l(\theta,\mu_{0},\mu_{1},\Sigma)=log\ \Pi_{i=1}^{m}p(x^{(i)}|y^{(i)};\mu_{0},\mu_{1},\Sigma)p(y^{(i)};\Phi)$
 \end_inset
 
- gives us 
-\begin_inset Formula $\phi_{MLE}=\frac{1}{m}\sum_{i=1}^{m}1\{y^{(i)}=1\},\mu_{k_{MLE}}=$
+ gives us
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\phi_{MLE}=\frac{1}{m}\sum_{i=1}^{m}1\{y^{(i)}=1\}$
 \end_inset
 
-avg of 
-\begin_inset Formula $x^{(i)}$
+,
+\begin_inset Formula $\mu_{k_{MLE}}=\text{avg of x^{(i)} classified as k}$
 \end_inset
 
- classified as k, 
+,
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula $\Sigma_{MLE}=\frac{1}{m}\sum_{i=1}^{m}(x^{(i)}-\mu_{y_{(i)}})(x^{(i)}-\mu_{y_{(i)}})^{T}$
 \end_inset
 
@@ -583,8 +723,11 @@ Gradient Decent:
 \end_layout
 
 \begin_layout Standard
-Lagrange Multipliers.
- Given 
+Lagrange Multipliers:
+\begin_inset Newline newline
+\end_inset
+
+Given 
 \begin_inset Formula $\min_{x}f(x)\ s.t.\ g_{i}(x)=0,\ h_{i}(x)\le0$
 \end_inset
 
@@ -820,12 +963,15 @@ KNN
 \begin_layout Standard
 
 \series bold
-Curse of 
+Curse of dimensionality
 \series default
-dimensionality: As the number of dimensions increases, everything becomes
- farther apart.
+: As the number of dimensions increases, everything becomes farther apart.
  Our low dimension intuition falls apart.
- Consider the Hypersphere/Hypercube ratio, it's close to zero at d=10.
+ Consider the Hypersphere/Hypercube ratio, it's close to zero at 
+\begin_inset Formula $d=10$
+\end_inset
+
+.
  How do deal with this curse:
 \end_layout
 
@@ -1163,18 +1309,6 @@ Agglomerative
 \end_inset
 
  Note: SL and CL are sensitive to outliers.
- 
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-%All heuristics give different hierarchies
-\end_layout
-
-\end_inset
-
- 
 \end_layout
 
 \begin_layout Itemize
@@ -1492,15 +1626,16 @@ Neural Nets explore what you can do by combining perceptrons, each of which
 
 \series bold
 Activation Functions:
-\series default
- 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula $\theta(s)=\tanh(s)=\frac{e^{s}-e^{-s}}{e^{s}+e^{-s}}\implies\theta'(s)=1-\theta^{2}(s)$
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula $\theta(s)=\sigma(s)=\frac{1}{1+e^{-s}}\implies\theta'(s)=\sigma(s)(1-\sigma(s))$
 \end_inset
 
@@ -1631,9 +1766,9 @@ The goal is to learn the weights
 \begin_inset Formula $w_{ij}^{(l)}$
 \end_inset
 
+.
 
 \emph default
-.
  We use gradient descent, but error function is non-convex so we tend to
  local minima.
  The naive version takes 
@@ -1650,10 +1785,9 @@ Back propagation
 \end_inset
 
 .
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
- 
+\begin_layout Standard
 \begin_inset Formula 
 \[
 \nabla e(w)\rightarrow\frac{\partial e(w)}{\partial w_{ij}^{(l)}}=\frac{\partial e(w)}{\partial s_{j}^{(l)}}\frac{\partial s_{j}^{(l)}}{\partial w_{ij}^{(l)}}=\delta_{j}^{(l)}x_{i}^{(l-1)}
@@ -1686,6 +1820,766 @@ Final Layer:
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+mytitle{CS 189 Final Note Minicards}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}Che Yeon // Li // Sean
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+SVM-like classifiers
+\series default
+ work with a 
+\emph on
+boundary
+\emph default
+, a hyperplane (a line for 2D data) that separates two classes.
+ 
+\emph on
+Support vectors
+\emph default
+ are the point(s) closest to the boundary.
+ 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ is the 
+\emph on
+margin
+\emph default
+, the distance between the boundary and the support vector(s).
+ The 
+\emph on
+parameter 
+\begin_inset Formula $\theta$
+\end_inset
+
+
+\emph default
+ is a vector.
+ 
+\begin_inset Formula $\boxed{\theta\cdot x}$
+\end_inset
+
+ gives predictions.
+ About 
+\begin_inset Formula $\theta$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Itemize
+The direction of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ defines the boundary.
+ We can choose this.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\left\Vert \theta\right\Vert $
+\end_inset
+
+ must be 
+\begin_inset Formula $1/\gamma$
+\end_inset
+
+, as restricted by 
+\begin_inset Formula $\forall i:y^{i}\theta\cdot x^{i}\geq1$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+We cannot explicitly choose this; it depends on the boundary.
+\begin_inset Newline newline
+\end_inset
+
+This restriction is turned into a cost in soft-margin SVM.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 1
+use_makebox 0
+width "97col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+Perceptron
+\series default
+ [2:11, 3:6] picks misclassified point and updates 
+\begin_inset Formula $\theta$
+\end_inset
+
+ just enough to classify it correctly:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\boxed{\theta\leftarrow\theta+x^{i}}$
+\end_inset
+
+ or 
+\begin_inset Formula $\boxed{\theta\leftarrow\theta-\nabla J\left(\theta\right)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+Overfits
+\emph default
+ when outliers skew the boundary.
+
+\emph on
+ Converges
+\emph default
+ iff separable.
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+Batch eqn
+\emph default
+ 
+\begin_inset Formula $\theta\cdot x=\sum_{i}\alpha^{i}y^{i}x^{i}\cdot x$
+\end_inset
+
+,
+\begin_inset Newline newline
+\end_inset
+
+where 
+\begin_inset Formula $\alpha=\text{\# times point was misclassified}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 1
+use_makebox 0
+width "97col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+Hard-margin SVM
+\series default
+ [3:36] maximizes the margin around the boundary.
+ Technically, it minimizes the distance between boundary and the vectors
+ closest to it (the support vectors):
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\boxed{\min_{\theta}\left\Vert \theta\right\Vert ^{2}\quad\text{such that}\ \forall i:y^{i}\theta\cdot x^{i}\geq1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Sometimes removing a few outliers lets us find a much higher margin or a
+ margin at all.
+ Hard-margin 
+\emph on
+overfits
+\emph default
+ by not seeing this.
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+Converges
+\emph default
+ iff separable.
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+Batch eqn
+\emph default
+ 
+\begin_inset Formula $\theta=\sum_{i}\alpha^{i}y^{i}x^{i}$
+\end_inset
+
+, where 
+\begin_inset Formula $\alpha^{i}=\mathbf{1}_{i\ \text{is support vector}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 1
+use_makebox 0
+width "97col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+Soft-margin SVM
+\series default
+ [3:37] is like hard-margin SVM but penalizes misclassifications:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\boxed{\min_{\theta}\left\Vert \theta\right\Vert ^{2}+C\sum_{i=1}^{n}\left(1-y^{i}\theta\cdot x^{i}\right)_{+}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+Hyperparameter
+\emph default
+ 
+\begin_inset Formula $C$
+\end_inset
+
+ is the hardness of the margin.
+ Lower 
+\begin_inset Formula $C$
+\end_inset
+
+ means more misclassifications but larger soft margin.
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+Overfits
+\emph default
+ on less data, more features, higher 
+\begin_inset Formula $C$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Regression
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 1
+use_makebox 0
+width "97col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+Linear regression
+\series default
+ [9:7]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 1
+use_makebox 0
+width "97col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+Lasso vs ridge regression
+\end_layout
+
+\begin_layout Plain Layout
+which one yields sparse results?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+columnbreak
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+More classifiers
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 1
+use_makebox 0
+width "97col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+KNN
+\series default
+ [14:4] Given an item 
+\begin_inset Formula $x$
+\end_inset
+
+, find the 
+\begin_inset Formula $k$
+\end_inset
+
+ training items 
+\begin_inset Quotes eld
+\end_inset
+
+closest
+\begin_inset Quotes erd
+\end_inset
+
+ to 
+\begin_inset Formula $x$
+\end_inset
+
+ and return the result of a vote.
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+Hyperparameter
+\emph default
+ 
+\begin_inset Formula $k$
+\end_inset
+
+, the number of neighbors.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Quotes eld
+\end_inset
+
+Closest
+\begin_inset Quotes erd
+\end_inset
+
+ can be defined by some norm (
+\begin_inset Formula $l_{2}$
+\end_inset
+
+ by default).
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+Overfits
+\emph default
+ when 
+\begin_inset Formula $k$
+\end_inset
+
+ is really small
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 1
+use_makebox 0
+width "97col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+Decision trees
+\series default
+: Recursively split on features that yield the best split.
+ Each tree has many nodes, which either split on a feature at a threshold,
+ or all data the same way.
+\begin_inset Newline newline
+\end_inset
+
+
+\emph on
+Hyperparameters
+\emph default
+ typically restrict complexity (max tree depth, min points at node) or penalize
+ it.
+ One particular one of interest is 
+\begin_inset Formula $d$
+\end_inset
+
+, the max number of nodes.
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+Overfits
+\emph default
+ when tree is deep or when we are allowed to split on a very small number
+ of items.
+\end_layout
+
+\begin_layout Plain Layout
+
+\series bold
+Bagging
+\series default
+: Make multiple trees, each with a random subset of training items.
+ To predict, take vote from trees.
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+Hyperparameters
+\emph default
+ # trees, proportion of items to subset.
+\end_layout
+
+\begin_layout Plain Layout
+
+\series bold
+Random forests
+\series default
+ is bagging, except, for each node, consider only a random subset of features
+ to split on.
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+Hyperparameters
+\emph default
+ proportion of features to consider.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 1
+use_makebox 0
+width "97col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+AdaBoost
+\series default
+ [dtrees3:34] Use any algorithm (i.e., decision trees) to train a weak learner,
+ take all the errors, and train a new learner on with the errors emphasized*.
+ To predict, predict with the first algorithm, then add on the prediction
+ of the second algorithm, and so on.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring *
+\noindent
+* For regression, train the new learner on the errors.
+\begin_inset Newline newline
+\end_inset
+
+For classification, give misclassified items more weight.
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+Hyperparameters
+\emph default
+ 
+\begin_inset Formula $B$
+\end_inset
+
+, the number of weak learners; 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, the learning rate.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+columnbreak
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Things to do
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 1
+use_makebox 0
+width "97col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+Spectral Theorem
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+generative vs discriminative
+\end_layout
+
+\begin_layout Itemize
+estimating post vs prior
+\end_layout
+
+\begin_layout Itemize
+early slides
+\end_layout
+
+\begin_layout Itemize
+cry
 \end_layout
 
 \begin_layout Standard
