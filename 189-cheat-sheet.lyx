@@ -12,13 +12,21 @@
 \usepackage{ifthen}
 \usepackage{multicol}
 \usepackage{titlesec}
-\usepackage{ulem}
 \usepackage{wrapfig}
 
 \titlespacing*{\section}{0pt}{0.5em}{0em}
 \titlespacing*{\subsection}{0pt}{0.5em}{0em}
-\titleformat{\section}{\normalfont\fontsize{12}{12}\bfseries}{\thesection}{1em}{}
-\titleformat{\subsection}{\normalfont\fontsize{10}{10}\bfseries}{\thesection}{1em}{}
+\titlespacing*{\subsubsection}{0pt}{0.5em}{0em}
+\titleformat{\section}{\vspace{1em}\titlerule\normalfont\fontsize{7}{7}\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\fontsize{6}{6}\bfseries}{\thesection}{1em}{}
+\titleformat{\subsubsection}{\titlerule\normalfont\fontsize{6}{6}}{\thesection}{1em}{}
+\titlespacing*{\labeling}{0pt}{0em}{0em}
+
+\let\stdboxed\boxed
+\renewcommand{\boxed}[1]{
+  \setlength{\fboxsep}{0.05em}
+  \stdboxed{#1}
+}
 
 \setlist{nolistsep,leftmargin=*}
 
@@ -33,9 +41,12 @@
 
 \raggedright
 
-\newcommand{\mytitle}[1]{
-  \begin{center}\large{\underline{#1}}\end{center}
+\newcommand{\mytitle}[2]{
+  \begin{center}\small{#1} -- \scriptsize{#2}\end{center}
 }
+
+
+\hyphenpenalty=100
 \end_preamble
 \options 3pt
 \use_default_options false
@@ -44,7 +55,7 @@
 \language_package none
 \inputencoding auto
 \fontencoding default
-\font_roman default
+\font_roman times
 \font_sans default
 \font_typewriter default
 \font_math auto
@@ -79,7 +90,7 @@
 \biblio_style plain
 \use_bibtopic false
 \use_indices false
-\paperorientation landscape
+\paperorientation portrait
 \suppress_date false
 \justification false
 \use_refstyle 0
@@ -94,7 +105,7 @@
 \secnumdepth -2
 \tocdepth 3
 \paragraph_separation skip
-\defskip 0.1em
+\defskip smallskip
 \quotes_language english
 \papercolumns 1
 \papersides 1
@@ -116,9 +127,9 @@ status open
 
 
 \backslash
-begin{multicols}{3}
+fontsize{5}{4}
 \backslash
-footnotesize
+selectfont
 \end_layout
 
 \end_inset
@@ -134,21 +145,24 @@ status open
 
 
 \backslash
-mytitle{CS 189 Final Note Sheet}
+mytitle{CS 189 Final Note Sheet}{Rishi Sharma, Peter Gao, et.
+ al.}
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-begin{center}Rishi Sharma and Peter Gao
-\backslash
-end{center}
+begin{multicols}{4}
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Probability & Matrix Review
 \end_layout
 
 \begin_layout Subsection
@@ -216,7 +230,6 @@ Expected Loss (Risk)
 \series default
 \shape default
 \size default
-\emph default
 \bar default
 \strikeout default
 \uuline default
@@ -248,7 +261,6 @@ Expected Loss (Risk)
 \series default
 \shape default
 \size default
-\emph default
 \bar default
 \strikeout default
 \uuline default
@@ -257,6 +269,132 @@ Expected Loss (Risk)
 \color inherit
  
 \begin_inset Formula $R(\alpha_{i}|x)=\sum_{j\not=i}^{c}P(\omega_{j}|x)=1-P(\omega_{i}|x)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Generative vs.
+ Discriminative Model
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Generative
+\series default
+: Model class conditional density 
+\begin_inset Formula $p(x|y)$
+\end_inset
+
+ and find 
+\begin_inset Formula $p(y|x)\propto p(x|y)p(y)$
+\end_inset
+
+ or model joint density 
+\begin_inset Formula $p(x,y)$
+\end_inset
+
+ and marginalize to find 
+\begin_inset Formula $p(y=k|x)=\int_{x}p(x,y=k)dx$
+\end_inset
+
+ (posterior)
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Discriminative
+\series default
+: Model conditional 
+\begin_inset Formula $p(y|x)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+class conditional
+\series default
+ 
+\begin_inset Formula $P(X|Y)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+posterior
+\series default
+ 
+\begin_inset Formula $P(Y|X)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+prior
+\series default
+ 
+\begin_inset Formula $P(Y)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+evidence
+\series default
+ 
+\begin_inset Formula $P(X)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
 \end_inset
 
 
@@ -344,63 +482,645 @@ Gradient Descent:
 \begin_inset Formula $\theta_{t+1}=\theta_{t}+\alpha(y_{t}^{(i)}-h(x_{t}^{(i)}))x_{t}^{(i)},\ \ h_{\theta}(x)=\theta^{\intercal}x$
 \end_inset
 
- 
+
 \end_layout
 
 \begin_layout Subsection
-Least Squares Solution
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-Min norm soln:
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
- 
-\begin_inset Formula $\min_{x}||Ax-y||_{2}^{2}\implies x^{*}=A^{\dagger}y$
+Multivariate Gaussian 
+\begin_inset Formula $X\sim\mathcal{N}(\mu,\Sigma)$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-Soln set: 
-\begin_inset Formula $x_{0}+N(A)=x^{*}+N(A)$
+
+\bar under
+Gaussian class conditionals lead to a logistic posterior.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $f(x;\mu,\Sigma)=\frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}\exp\left(-\frac{1}{2}(x-\mu)^{T}\Sigma^{-1}(x-\mu)\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\Sigma=E[(X-\mu)(X-\mu)^{T}]=E[XX^{T}]-\mu\mu^{T}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\Sigma\text{ is PSD}\implies x^{T}\Sigma x\ge0\text{, if inverse exists }\Sigma\text{ must be PD}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\text{If }X\sim N(\mu,\Sigma),\ \text{then}\ AX+b\sim N(A\mu+b,A\Sigma A^{T})$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset Formula $\implies\Sigma^{-\frac{1}{2}}(X-\mu)\sim N(0,I),\text{ where }\Sigma^{-\frac{1}{2}}=U\Lambda^{-\frac{1}{2}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The distribution is the result of a linear transformation of a vector of
+ univariate Gaussians 
+\begin_inset Formula $Z\sim\mathcal{N}(0,I)$
+\end_inset
+
+ such that 
+\begin_inset Formula $X=AZ+\mu$
+\end_inset
+
+ where we have 
+\begin_inset Formula $\Sigma=AA^{\intercal}$
+\end_inset
+
+.
+ From the pdf, we see that the level curves of the distribution decrease
+ proportionally with 
+\begin_inset Formula $x^{\intercal}\Sigma^{-1}x$
+\end_inset
+
+ (assume 
+\begin_inset Formula $\mu=0$
+\end_inset
+
+) 
+\begin_inset Formula $\implies$
 \end_inset
 
 
 \begin_inset Formula 
 \[
-A^{\dagger}=\left\{ \begin{array}{lr}
-(A^{\intercal}A)^{-1}A^{\intercal} & \text{\ensuremath{A} full column rank}\\
-A^{\intercal}(AA^{\intercal})^{-1} & \text{\ensuremath{A} full row rank}\\
-V\Sigma^{\dagger}U^{\intercal} & \text{any \ensuremath{A}}
-\end{array}\right.
+\text{\ensuremath{c}-level set of \ensuremath{f}}\propto\{x:x^{\intercal}\Sigma^{-1}x=c\}
 \]
 
 \end_inset
 
-L2 Reg: 
+
+\begin_inset Formula 
+\[
+x^{\intercal}\Sigma^{-1}=c\equiv x^{\intercal}U\Lambda^{-1}U^{\intercal}x=c\implies
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\underbrace{\lambda_{1}^{-1}(u_{1}^{\intercal}x)^{2}}_{\text{axis length: \ensuremath{\sqrt{\lambda_{1}}}}}+\cdots+\underbrace{\lambda_{n}^{-1}(u_{n}^{\intercal}x)^{2}}_{\text{axis length: \ensuremath{\sqrt{\lambda_{n}}}}}=c
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus the level curves form an ellipsoid with axis lengths equal to the square
+ root of the eigenvalues of the covariance matrix.
+\end_layout
+
+\begin_layout Subsection
+Loss Functions
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Binomial deviance
+\series default
+ 
+\begin_inset Formula $=\log\left[1+e^{-yf\left(x\right)}\right]$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+minimizing function 
+\begin_inset Formula $f\left(x\right)=\log\frac{\mathrm{P}\left[Y=+1\mid x\right]}{\mathrm{P}\left[Y=-1\mid x\right]}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+SVM hinge loss
+\series default
+ 
+\begin_inset Formula $=\left[1-yf\left(x\right)\right]_{+}$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+minimizing function 
+\begin_inset Formula $f\left(x\right)=\mathrm{sign}\left(\mathrm{P}\left[Y=+1\mid x\right]-\frac{1}{2}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Squared error
+\series default
+ 
+\begin_inset Formula $=\left[y-f\left(x\right)\right]^{2}=\left[1-yf\left(x\right)\right]^{2}$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+minimizing function  
+\begin_inset Formula $f\left(x\right)=2\mathrm{P}\left[Y=+1\mid x\right]-1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\begin_inset Quotes eld
+\end_inset
+
+Huberized
+\begin_inset Quotes erd
+\end_inset
+
+ square hinge loss
+\series default
+ 
+\begin_inset Formula $=\left\{ \begin{array}{ll}
+-4yf\left(x\right) & \text{if}\ yf\left(x\right)<-1\\
+\left[1-yf\left(x\right)\right]_{+}^{2} & \text{otherwise}
+\end{array}\right.$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+minimizing function 
+\begin_inset Formula $f\left(x\right)=2\mathrm{P}\left[Y=+1\mid x\right]-1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Optimization
+\end_layout
+
+\begin_layout Standard
+Newton's Method: 
+\begin_inset Formula $\theta_{t+1}=\theta_{t}-[\nabla_{\theta}^{2}f(\theta_{t})]^{-1}\nabla_{\theta}f(\theta_{t})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Gradient Decent: 
+\begin_inset Formula $\theta_{t+1}=\theta_{t}-\alpha\nabla_{\theta}f(\theta_{t})$
+\end_inset
+
+, for minimizing
+\end_layout
+
+\begin_layout Subsection
+Gradients
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{\partial{\bf {y}}}{\partial{\bf {x}}}\triangleq\begin{bmatrix}\frac{\partial y_{1}}{\partial x_{1}} & \dots & \frac{\partial y_{m}}{\partial x_{1}}\\
+\vdots & \ddots & \vdots\\
+\frac{\partial y_{1}}{\partial x_{n}} & \dots & \frac{\partial y_{m}}{\partial x_{n}}
+\end{bmatrix},$
+\end_inset
+
+ 
+\begin_inset Formula $\frac{\partial(A{\bf x})}{\partial{\bf x}}=A^{T},\frac{\partial({\bf x}^{T}A)}{\partial{\bf x}}=A,$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset Formula $\frac{\partial({\bf x}^{T}{\bf x})}{\partial{\bf x}}=2{\bf x},\frac{\partial({\bf x}^{T}A{\bf x})}{\partial{\bf x}}=(A+A^{T}){\bf x},\frac{\partial(trBA)}{\partial A}=B^{T}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+columnbreak
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Support Vector Machines
+\end_layout
+
+\begin_layout Standard
+In the strictly separable case, the goal is to find a separating hyperplane
+ (like logistic regression) except now we don't just want any hyperplane,
+ but one with the largest margin.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $H=\{\omega^{T}x+b=0\}$
+\end_inset
+
+, since scaling 
+\begin_inset Formula $\omega$
+\end_inset
+
+ and b in opposite directions doesn't change the hyperplane our optimization
+ function should have scaling invariance built into it.
+ Thus, we do it now and define the closest points to the hyperplane 
+\begin_inset Formula $x_{sv}$
+\end_inset
+
+ (support vectors) to satisfy: 
+\begin_inset Formula $|\omega^{T}x_{sv}+b|=1$
+\end_inset
+
+.
+ The distance from any support vector to the hyper plane is now: 
+\begin_inset Formula $\frac{1}{||\omega||_{2}}$
+\end_inset
+
+.
+ Maximizing the distance to the hyperplane is the same as minimizing 
+\begin_inset Formula $||\omega||_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The final optimization problem is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\boxed{\min_{\omega,b}\frac{1}{2}||\omega||_{2}\ s.t.\ y^{(i)}(w^{T}x^{(i)}+b)\ge1,i=1,\dots,m}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+Primal
+\bar default
+: 
+\begin_inset Formula $L_{p}(\omega,b,\alpha)=\frac{1}{2}||\omega||_{2}-\sum_{i=1}^{m}\alpha_{i}(y^{(i)}(w^{T}x^{(i)}+b)-1)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{\partial L_{p}}{\partial\omega}=\omega-\sum\alpha_{i}y^{(i)}x^{(i)}=0\implies\omega=\sum\alpha_{i}y^{(i)}x^{(i)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{\partial L_{p}}{\partial b}=-\sum\alpha_{i}y^{(i)}=0,\text{\ \ \ Note: }\alpha_{i}\ne0$
+\end_inset
+
+ only for support vectors.
+\end_layout
+
+\begin_layout Standard
+Substitute the derivatives into the primal to get the dual.
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+Dual
+\bar default
+: 
+\begin_inset Formula $L_{d}(\alpha)=\sum_{i=1}^{m}\alpha_{i}-\frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}y^{(i)}y^{(j)}\alpha_{i}\alpha_{j}(x^{(i)})^{T}x^{(j)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+KKT says 
+\begin_inset Formula $\alpha_{n}(y_{n}(w^{T}x_{n}+b)-1)=0$
+\end_inset
+
+ where 
+\begin_inset Formula $\alpha_{n}>0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In the non-separable case we allow points to cross the marginal boundary
+ by some amount 
+\begin_inset Formula $\xi$
+\end_inset
+
+ and penalize it.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\boxed{\min_{\omega,b}\frac{1}{2}||\omega||_{2}+C\sum_{i=1}^{m}\xi_{i}\ \ s.t.\ \ y^{(i)}(w^{T}x^{(i)}+b)\ge1-\xi_{i}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The dual for non-separable doesn't change much except that each 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+ now has an upper bound of C 
+\begin_inset Formula $\implies0\le\alpha_{i}\le C$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsection
+Lagrangian
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\boxed{L\left(x,\lambda\right)=f_{0}\left(x\right)+\sum_{i=1}^{m}\lambda_{i}f_{i}\left(x\right)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Think of the 
+\begin_inset Formula $\lambda_{i}$
+\end_inset
+
+ as the cost of violating the constraint 
+\begin_inset Formula $f_{i}\left(x\right)\leq0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $L$
+\end_inset
+
+ defines a saddle point game: one player (
+\noun on
+Min
+\noun default
+); the other player (
+\noun on
+Max
+\noun default
+) chooses 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ to maximize 
+\begin_inset Formula $L$
+\end_inset
+
+.
+ If 
+\noun on
+Min
+\noun default
+ violates a constraint, 
+\begin_inset Formula $f_{i}\left(x\right)>0$
+\end_inset
+
+, then 
+\noun on
+Max
+\noun default
+ can drive 
+\begin_inset Formula $L$
+\end_inset
+
+ to infinity.
+\end_layout
+
+\begin_layout Itemize
+We call the original optimization problem the 
+\bar under
+primal
+\bar default
+ problem.
+\begin_inset Newline newline
+\end_inset
+
+It has value
+\begin_inset Formula $p*=\min_{x}\max_{\lambda\geq0}L\left(x,\lambda\right)$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+(Because of an infeasible 
+\begin_inset Formula $x$
+\end_inset
+
+, 
+\begin_inset Formula $L\left(x,\lambda\right)$
+\end_inset
+
+ can be made infinite, and for a feasible 
+\begin_inset Formula $x$
+\end_inset
+
+, the 
+\begin_inset Formula $\lambda_{i}f_{i}\left(x\right)$
+\end_inset
+
+ terms will become zero.)
+\end_layout
+
+\begin_layout Itemize
+Define 
+\begin_inset Formula $g\left(\lambda\right):=\min_{x}L\left(x,\lambda\right)$
+\end_inset
+
+, and define the 
+\bar under
+dual
+\bar default
+ problem as
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $d*=\max_{\lambda\geq0}g\left(\lambda\right)=\max_{\lambda\geq0}\min_{x}L\left(x,\lambda\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+In a zero sum game, it's always better to play second: 
+\begin_inset Formula $p*=\min_{x}\max_{\lambda\geq0}L\left(x,\lambda\right)\geq\max_{\lambda\geq0}\min_{x}L\left(x,\lambda\right)=d*$
+\end_inset
+
+This is called 
+\bar under
+weak duality
+\bar default
+.
+\end_layout
+
+\begin_layout Itemize
+If there is a 
+\bar under
+saddle point
+\bar default
+ 
+\begin_inset Formula $\left(x*,\lambda*\right)$
+\end_inset
+
+, so that for all 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda\geq0$
+\end_inset
+
+, 
+\begin_inset Formula $L\left(x*,\lambda\right)\leq L\left(x*,\lambda*\right)\leq L\left(x,\lambda*\right),$
+\end_inset
+
+ then we have 
+\bar under
+strong duality
+\bar default
+: the primal and dual have the same value, 
+\begin_inset Formula $p*=\min_{x}\max_{\lambda\geq0}L\left(x,\lambda\right)=\max_{\lambda\geq0}\min_{x}L\left(x,\lambda\right)=d*$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using notation from Peter's notes:
+\end_layout
+
+\begin_layout Standard
+Given 
+\begin_inset Formula $\min_{x}f(x)\ s.t.\ g_{i}(x)=0,\ h_{i}(x)\le0$
+\end_inset
+
+, the corresponding Lagrangian is: 
+\begin_inset Formula $L(x,\alpha,\beta)=f(x)+\sum_{i=1}^{k}\alpha_{i}g_{i}(x)+\sum_{i=1}^{l}\beta_{i}h_{i}(x)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We min over x and max over the Lagrange multipliers 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Regression
+\end_layout
+
+\begin_layout Standard
+In general the loss function consists of two parts, the loss term and the
+ regularization term.
+ 
+\begin_inset Formula $J(\omega)=\sum_{i}Loss_{i}+\lambda R(\omega)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+L2 regularization results in 
+\series bold
+ridge regression
+\series default
+.
+\begin_inset Newline newline
+\end_inset
+
+Used when A contains a null space.
+ L2 reg falls out of the MLE when we add a Gaussian prior on x with 
+\begin_inset Formula $\Sigma=cI$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+
 \begin_inset Formula $\min_{x}||Ax-y||_{2}^{2}+\lambda||x||_{2}^{2}\implies x^{*}=(A^{T}A+\lambda I)^{-1}X^{T}y$
 \end_inset
 
@@ -408,13 +1128,20 @@ L2 Reg:
 \end_layout
 
 \begin_layout Standard
-The above variant is used when A contains a null space.
- L2 Reg falls out of the MLE when we add a Gaussian prior on x with 
-\begin_inset Formula $\Sigma=cI$
+L1 regularization results in 
+\series bold
+lasso regression
+\series default
+.
+\begin_inset Newline newline
 \end_inset
 
-.
- We get L1 Reg when x has a Laplace prior.
+Used when 
+\begin_inset Formula $x$
+\end_inset
+
+ has a Laplace prior.
+ Gives sparse results.
 \end_layout
 
 \begin_layout Subsection
@@ -488,120 +1215,27 @@ Batch:
  
 \end_layout
 
-\begin_layout Subsection
-Multivariate Gaussian 
-\begin_inset Formula $X\sim\mathcal{N}(\mu,\Sigma)$
+\begin_layout Standard
+\begin_inset VSpace vfill
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $f(x;\mu,\Sigma)=\frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}\exp\left(-\frac{1}{2}(x-\mu)^{T}\Sigma^{-1}(x-\mu)\right)$
-\end_inset
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
 
 
+\backslash
+columnbreak
 \end_layout
 
-\begin_layout Standard
-\begin_inset Formula $\Sigma=E[(X-\mu)(X-\mu)^{T}]=E[XX^{T}]-\mu\mu^{T}$
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $\Sigma\text{ is PSD}\implies x^{T}\Sigma x\ge0\text{, if inverse exists }\Sigma\text{ must be PD}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $\text{If }X\sim N(\mu,\Sigma),\ \text{then}\ AX+b\sim N(A\mu+b,A\Sigma A^{T})$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
- 
-\begin_inset Formula $\implies\Sigma^{-\frac{1}{2}}(X-\mu)\sim N(0,I),\text{ where }\Sigma^{-\frac{1}{2}}=U\Lambda^{-\frac{1}{2}}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset line
-LatexCommand rule
-offset "0.5ex"
-width "100col%"
-height "1pt"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The distribution is the result of a linear transformation of a vector of
- univariate Gaussians 
-\begin_inset Formula $Z\sim\mathcal{N}(0,I)$
-\end_inset
-
- such that 
-\begin_inset Formula $X=AZ+\mu$
-\end_inset
-
- where we have 
-\begin_inset Formula $\Sigma=AA^{\intercal}$
-\end_inset
-
-.
- From the pdf, we see that the level curves of the distribution decrease
- proportionally with 
-\begin_inset Formula $x^{\intercal}\Sigma^{-1}x$
-\end_inset
-
- (assume 
-\begin_inset Formula $\mu=0$
-\end_inset
-
-) 
-\begin_inset Formula $\implies$
-\end_inset
-
-
-\begin_inset Formula 
-\[
-\text{\ensuremath{c}-level set of \ensuremath{f}}\propto\{x:x^{\intercal}\Sigma^{-1}x=c\}
-\]
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-x^{\intercal}\Sigma^{-1}=c\equiv x^{\intercal}U\Lambda^{-1}U^{\intercal}x=c\implies
-\]
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-\underbrace{\lambda_{1}^{-1}(u_{1}^{\intercal}x)^{2}}_{\text{axis length: \ensuremath{\sqrt{\lambda_{1}}}}}+\cdots+\underbrace{\lambda_{n}^{-1}(u_{n}^{\intercal}x)^{2}}_{\text{axis length: \ensuremath{\sqrt{\lambda_{n}}}}}=c
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Thus the level curves form an ellipsoid with axis lengths equal to the square
- root of the eigenvalues of the covariance matrix.
 \end_layout
 
 \begin_layout Subsection
@@ -681,18 +1315,6 @@ where
 \end_layout
 
 \begin_layout Standard
-\begin_inset CommandInset line
-LatexCommand rule
-offset "0.5ex"
-width "100col%"
-height "1pt"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 For QDA, the model is the same as LDA except that each class has a unique
  covariance matrix.
  
@@ -702,205 +1324,8 @@ For QDA, the model is the same as LDA except that each class has a unique
 
 \end_layout
 
-\begin_layout Subsection
-Optimization
-\end_layout
-
-\begin_layout Standard
-Newton's Method: 
-\begin_inset Formula $\theta_{t+1}=\theta_{t}-[\nabla_{\theta}^{2}f(\theta_{t})]^{-1}\nabla_{\theta}f(\theta_{t})$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Gradient Decent: 
-\begin_inset Formula $\theta_{t+1}=\theta_{t}-\alpha\nabla_{\theta}f(\theta_{t})$
-\end_inset
-
-, for minimizing
-\end_layout
-
-\begin_layout Standard
-Lagrange Multipliers:
-\begin_inset Newline newline
-\end_inset
-
-Given 
-\begin_inset Formula $\min_{x}f(x)\ s.t.\ g_{i}(x)=0,\ h_{i}(x)\le0$
-\end_inset
-
-, the corresponding Lagrangian is: 
-\begin_inset Formula $L(x,\alpha,\beta)=f(x)+\sum_{i=1}^{k}\alpha_{i}g_{i}(x)+\sum_{i=1}^{l}\beta_{i}h_{i}(x)$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We min over x and max over the Lagrange multipliers 
-\begin_inset Formula $\alpha$
-\end_inset
-
- and 
-\begin_inset Formula $\beta$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Support Vector Machines
-\end_layout
-
-\begin_layout Standard
-In the strictly separable case, the goal is to find a separating hyperplane
- (like logistic regression) except now we don't just want any hyperplane,
- but one with the largest margin.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $H=\{\omega^{T}x+b=0\}$
-\end_inset
-
-, since scaling 
-\begin_inset Formula $\omega$
-\end_inset
-
- and b in opposite directions doesn't change the hyperplane our optimization
- function should have scaling invariance built into it.
- Thus, we do it now and define the closest points to the hyperplane 
-\begin_inset Formula $x_{sv}$
-\end_inset
-
- (support vectors) to satisfy: 
-\begin_inset Formula $|\omega^{T}x_{sv}+b|=1$
-\end_inset
-
-.
- The distance from any support vector to the hyper plane is now: 
-\begin_inset Formula $\frac{1}{||\omega||_{2}}$
-\end_inset
-
-.
- Maximizing the distance to the hyperplane is the same as minimizing 
-\begin_inset Formula $||\omega||_{2}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-The final optimization problem is:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $\boxed{\min_{\omega,b}\frac{1}{2}||\omega||_{2}\ s.t.\ y^{(i)}(w^{T}x^{(i)}+b)\ge1,i=1,\dots,m}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Primal: 
-\begin_inset Formula $L_{p}(\omega,b,\alpha)=\frac{1}{2}||\omega||_{2}-\sum_{i=1}^{m}\alpha_{i}(y^{(i)}(w^{T}x^{(i)}+b)-1)$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $\frac{\partial L_{p}}{\partial\omega}=\omega-\sum\alpha_{i}y^{(i)}x^{(i)}=0\implies\omega=\sum\alpha_{i}y^{(i)}x^{(i)}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $\frac{\partial L_{p}}{\partial b}=-\sum\alpha_{i}y^{(i)}=0,\text{\ \ \ Note: }\alpha_{i}\ne0$
-\end_inset
-
- only for support vectors.
-\end_layout
-
-\begin_layout Standard
-Substitute the derivatives into the primal to get the dual.
-\end_layout
-
-\begin_layout Standard
-Dual: 
-\begin_inset Formula $L_{d}(\alpha)=\sum_{i=1}^{m}\alpha_{i}-\frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}y^{(i)}y^{(j)}\alpha_{i}\alpha_{j}(x^{(i)})^{T}x^{(j)}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-KKT says 
-\begin_inset Formula $\alpha_{n}(y_{n}(w^{T}x_{n}+b)-1)=0$
-\end_inset
-
- where 
-\begin_inset Formula $\alpha_{n}>0$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset line
-LatexCommand rule
-offset "0.5ex"
-width "100col%"
-height "1pt"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In the non-separable case we allow points to cross the marginal boundary
- by some amount 
-\begin_inset Formula $\xi$
-\end_inset
-
- and penalize it.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $\boxed{\min_{\omega,b}\frac{1}{2}||\omega||_{2}+C\sum_{i=1}^{m}\xi_{i}\ \ s.t.\ \ y^{(i)}(w^{T}x^{(i)}+b)\ge1-\xi_{i}}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The dual for non-separable doesn't change much except that each 
-\begin_inset Formula $\alpha_{i}$
-\end_inset
-
- now has an upper bound of C 
-\begin_inset Formula $\implies0\le\alpha_{i}\le C$
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Subsection
-Loss Functions
-\end_layout
-
-\begin_layout Standard
-In general the loss function consists of two parts, the loss term and the
- regularization term.
- 
-\begin_inset Formula $J(\omega)=\sum_{i}Loss_{i}+\lambda R(\omega)$
-\end_inset
-
-
+\begin_layout Section
+Other Classifiers
 \end_layout
 
 \begin_layout Subsection
@@ -1037,78 +1462,6 @@ K-d trees
 \end_layout
 
 \begin_layout Subsection
-Gradients
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $\frac{\partial{\bf {y}}}{\partial{\bf {x}}}\triangleq\begin{bmatrix}\frac{\partial y_{1}}{\partial x_{1}} & \dots & \frac{\partial y_{m}}{\partial x_{1}}\\
-\vdots & \ddots & \vdots\\
-\frac{\partial y_{1}}{\partial x_{n}} & \dots & \frac{\partial y_{m}}{\partial x_{n}}
-\end{bmatrix},$
-\end_inset
-
- 
-\begin_inset Formula $\frac{\partial(A{\bf x})}{\partial{\bf x}}=A^{T},\frac{\partial({\bf x}^{T}A)}{\partial{\bf x}}=A,$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
- 
-\begin_inset Formula $\frac{\partial({\bf x}^{T}{\bf x})}{\partial{\bf x}}=2{\bf x},\frac{\partial({\bf x}^{T}A{\bf x})}{\partial{\bf x}}=(A+A^{T}){\bf x},\frac{\partial(trBA)}{\partial A}=B^{T}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Generative vs.
- Discriminative Model
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Generative
-\series default
-: Model class conditional density 
-\begin_inset Formula $p(x|y)$
-\end_inset
-
- and find 
-\begin_inset Formula $p(y|x)\propto p(x|y)p(y)$
-\end_inset
-
- or model joint density 
-\begin_inset Formula $p(x,y)$
-\end_inset
-
- and marginalize to find 
-\begin_inset Formula $p(y=k|x)=\int_{x}p(x,y=k)dx$
-\end_inset
-
- 
-\begin_inset Newline newline
-\end_inset
-
- 
-\series bold
-Discriminative
-\series default
-: Model conditional 
-\begin_inset Formula $p(y|x)$
-\end_inset
-
-.
- 
-\begin_inset Newpage newpage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
 Decision Trees
 \end_layout
 
@@ -1153,9 +1506,9 @@ DT's are prone to label noise.
 Heurisitic
 \series default
 : For 
-\emph on
+\bar under
 classification
-\emph default
+\bar default
 , maximize information gain 
 \begin_inset Formula 
 \[
@@ -1204,9 +1557,9 @@ Random Forests
 Problem
 \series default
 : DT's are 
-\emph on
+\bar under
 unstable
-\emph default
+\bar default
 : small changes in the input data have large effect on tree structure 
 \begin_inset Formula $\implies$
 \end_inset
@@ -1282,310 +1635,6 @@ AdaBoost
 \end_layout
 
 \begin_layout Subsection
-Clustering
-\end_layout
-
-\begin_layout Standard
-Unsupervised Learning (no labels).
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Hierarchical
-\series default
-: 
-\end_layout
-
-\begin_layout Itemize
-
-\emph on
-Agglomerative
-\emph default
-: Start with n points, merge 2 closest clusters using some measure, such
- as: Single-link (closest pair), Complete-link (furthest pair), Average-link
- (average of all pairs), Centroid (centroid distance).
-\begin_inset Newline newline
-\end_inset
-
- Note: SL and CL are sensitive to outliers.
-\end_layout
-
-\begin_layout Itemize
-
-\emph on
-Divisive
-\emph default
-: Start with single cluster, recursively divide clusters into 2 subclusters.
- 
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Partitioning
-\series default
-: Partition the data into a K mutually exclusive exhaustive groups (i.e.
- encode k=C(i)).
- Iteratively reallocate to minimize some loss function.
- Finding the correct partitions is hard.
- Use a greedy algorithm called K-means (coordinate decent).
- Loss function is non-convex thus we find local minima.
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-K-means
-\series default
-: Choose clusters at random, calculate centroid of each cluster, reallocate
- objects to nearest centroid, repeat.
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-K-means
-\series default
-++: Initialize clusters one by one.
- D(x) = distance of point x to nearest cluster.
- Pr(x is new cluster center)
-\begin_inset Formula $\propto D(x)^{2}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-K-medians
-\series default
-: Works with arbitrary distance/dissimilarity metric, the centers 
-\begin_inset Formula $\mu_{k}$
-\end_inset
-
- are represented by data points.
- Is more restrictive thus has higher loss.
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-General Loss
-\series default
-: 
-\begin_inset Formula $\sum_{n=1}^{N}\sum_{k=1}^{K}d(x_{n},\mu_{k})r_{nk}$
-\end_inset
-
- where 
-\begin_inset Formula $r_{nk}=1$
-\end_inset
-
- if 
-\begin_inset Formula $x_{n}$
-\end_inset
-
- is in cluster k, and 0 o.w.
-\end_layout
-
-\begin_layout Subsection
-Vector Quantization
-\end_layout
-
-\begin_layout Standard
-Use clustering to find representative prototype vectors, which are used
- to simplify representations of signals.
-\end_layout
-
-\begin_layout Subsection
-Parametric Density Estimation
-\end_layout
-
-\begin_layout Standard
-(Mixture Models).
- Assume PDF is made up of multiple gaussians with different centers.
- 
-\begin_inset Formula $P(x)=\sum_{i=1}^{n_{c}}P(c_{i})P(x|c_{i})$
-\end_inset
-
- with objective function as log likelihood of data.
- Use EM to estimate this model.
- 
-\begin_inset Newline newline
-\end_inset
-
-E Step: 
-\begin_inset Formula $P(\mu_{i}|x_{k})=\frac{P(\mu_{i})P(x_{k}|\mu_{i})}{\sum_{j}P(\mu_{j})P(x_{j}|\mu_{j})}$
-\end_inset
-
- 
-\begin_inset Newline newline
-\end_inset
-
-M Step: 
-\begin_inset Formula $P(c_{i})=\frac{1}{n_{e}}\sum_{k=1}^{n_{e}}P(\mu_{i}|x_{k})$
-\end_inset
-
- 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $\mu_{i}=\frac{\sum_{k}x_{k}P(\mu_{i}|x_{k})}{\sum_{k}P(\mu_{i}|x_{k})}$
-\end_inset
-
- 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $\sigma_{i}^{2}=\frac{\sum_{k}(x_{k}-\mu_{i})^{2}P(\mu_{i}|x_{k})}{\sum_{k}P(\mu_{i}|x_{k})}$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Subsection
-Non-parametric Density Estimation
-\end_layout
-
-\begin_layout Standard
-Can use Histogram or Kernel Density Estimation (KDE).
-\end_layout
-
-\begin_layout Standard
-KDE: 
-\begin_inset Formula $P(x)=\frac{1}{n}\sum K({\bf x}-{\bf x_{i}})$
-\end_inset
-
- is a function of the data.
-\end_layout
-
-\begin_layout Standard
-The kernel K has the following properties:
-\end_layout
-
-\begin_layout Standard
-Symmetric, Normalized 
-\begin_inset Formula $\int_{\mathbb{R}^{d}}K(x)dx=1$
-\end_inset
-
-, and 
-\begin_inset Formula $\lim_{||x||\rightarrow\infty}||x||^{d}K(x)=0$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-The 
-\emph on
-bandwidth
-\emph default
- is the width of the kernel function.
- Too small = jagged results, too large = smoothed out results.
-\end_layout
-
-\begin_layout Subsection
-Mode Seeking
-\end_layout
-
-\begin_layout Standard
-To find 
-\begin_inset Quotes eld
-\end_inset
-
-Bumps
-\begin_inset Quotes erd
-\end_inset
-
- in the distribution, we can just estimate the gradient.
-\end_layout
-
-\begin_layout Standard
-Mean Shift: Translate kernel window by m(x).
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-m(x)=\left[\frac{\sum_{i=1}^{n}x_{i}g(\frac{||x-x_{i}||^{2}}{h})}{\sum_{i=1}^{n}g(\frac{||x-x_{i}||^{2}}{h})}-x\right]
-\]
-
-\end_inset
-
-Where g is a constant Kernel with radius R (Can use any Kernel for generalized
- results).
-\end_layout
-
-\begin_layout Standard
-To deal with saddle points, perturb modes and prune by taking the highest
- mode.
-\end_layout
-
-\begin_layout Standard
-
-\emph on
-Pro's
-\emph default
-: 
-\end_layout
-
-\begin_layout Itemize
-Auto convergence speed, near maxima the steps are small.
- 
-\end_layout
-
-\begin_layout Itemize
-Only one parameter to choose (window size).
- 
-\end_layout
-
-\begin_layout Itemize
-Does not assume prior shape on data.
- 
-\end_layout
-
-\begin_layout Standard
-
-\emph on
-Con's
-\emph default
-: 
-\end_layout
-
-\begin_layout Itemize
-The window size is non-trivial, and incorrect window size can cause modes
- to be merged (or can cause additional 
-\begin_inset Quotes eld
-\end_inset
-
-shallow
-\begin_inset Quotes erd
-\end_inset
-
- modes to be generated)
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-columnbreak
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Subsection
 Neural Networks
 \end_layout
 
@@ -1603,7 +1652,7 @@ Neural Nets explore what you can do by combining perceptrons, each of which
 \begin_inset Graphics
 	filename graphics/NN.pdf
 	lyxscale 50
-	scale 31
+	width 72col%
 
 \end_inset
 
@@ -1615,7 +1664,7 @@ Neural Nets explore what you can do by combining perceptrons, each of which
 \begin_inset Graphics
 	filename graphics/NN2.pdf
 	lyxscale 35
-	scale 20
+	width 21col%
 
 \end_inset
 
@@ -1761,14 +1810,14 @@ Notation:
 
 \begin_layout Standard
 
-\emph on
+\bar under
 The goal is to learn the weights 
 \begin_inset Formula $w_{ij}^{(l)}$
 \end_inset
 
 .
 
-\emph default
+\bar default
  We use gradient descent, but error function is non-convex so we tend to
  local minima.
  The naive version takes 
@@ -1777,9 +1826,9 @@ The goal is to learn the weights
 
 .
  
-\emph on
+\bar under
 Back propagation
-\emph default
+\bar default
 , an algorithm for efficient computation of the gradient, takes 
 \begin_inset Formula $O(w)$
 \end_inset
@@ -1788,13 +1837,13 @@ Back propagation
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\[
-\nabla e(w)\rightarrow\frac{\partial e(w)}{\partial w_{ij}^{(l)}}=\frac{\partial e(w)}{\partial s_{j}^{(l)}}\frac{\partial s_{j}^{(l)}}{\partial w_{ij}^{(l)}}=\delta_{j}^{(l)}x_{i}^{(l-1)}
-\]
-
+\begin_inset Formula $\nabla e(w)\rightarrow\frac{\partial e(w)}{\partial w_{ij}^{(l)}}=\frac{\partial e(w)}{\partial s_{j}^{(l)}}\frac{\partial s_{j}^{(l)}}{\partial w_{ij}^{(l)}}=\delta_{j}^{(l)}x_{i}^{(l-1)}$
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
 Final Layer: 
 \begin_inset Formula $\delta_{j}^{(L)}=\frac{\partial e(w)}{\partial s_{j}^{(l)}}=\frac{\partial e(w)}{\partial x_{j}^{(L)}}\frac{\partial x_{j}^{(L)}}{\partial s_{j}^{(L)}}=e'(x_{j}^{(L)})\theta_{out}'(s_{j}^{L})$
 \end_inset
@@ -1803,19 +1852,429 @@ Final Layer:
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\begin{eqnarray*}
-\text{General: }\delta_{i}^{(l-1)}=\frac{\partial e(w)}{\partial s_{i}^{(l-1)}} & = & \sum_{j=1}^{d^{(l)}}\frac{\partial e(w)}{\partial s_{j}^{(l)}}\times\frac{\partial s_{j}^{(l)}}{\partial x_{i}^{(l-1)}}\times\frac{\partial x_{i}^{(l-1)}}{\partial s_{i}^{(l-1)}}\\
- & = & \sum_{j=1}^{d^{(l)}}\delta_{j}^{(l)}\times w_{ij}^{(l)}\times\theta'(s_{i}^{(l-1)})
-\end{eqnarray*}
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+General:
+\family default
+\series default
+\shape default
+\size default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Formula $\delta_{i}^{(l-1)}=\frac{\partial e(w)}{\partial s_{i}^{(l-1)}}=\sum_{j=1}^{d^{(l)}}\frac{\partial e(w)}{\partial s_{j}^{(l)}}\times\frac{\partial s_{j}^{(l)}}{\partial x_{i}^{(l-1)}}\times\frac{\partial x_{i}^{(l-1)}}{\partial s_{i}^{(l-1)}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $=\sum_{j=1}^{d^{(l)}}\delta_{j}^{(l)}\times w_{ij}^{(l)}\times\theta'(s_{i}^{(l-1)})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename graphics/NN1.pdf
+	lyxscale 50
+	width 100col%
 
 \end_inset
 
 
-\begin_inset Graphics
-	filename graphics/NN1.pdf
-	lyxscale 50
-	scale 28
+\end_layout
+
+\begin_layout Section
+Unsupervised Learning
+\end_layout
+
+\begin_layout Subsection
+Clustering
+\end_layout
+
+\begin_layout Standard
+Unsupervised learning (no labels).
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Distance function
+\series default
+s.
+ Suppose we have two sets of points.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Single linkage
+\series default
+ is minimum distance between members.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Complete linkage
+\series default
+ is maximum distance between members.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Centroid linkage
+\series default
+ is distance between centroids.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Average linkage
+\series default
+ is average distance between all pairs.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Hierarchical
+\series default
+: 
+\end_layout
+
+\begin_layout Itemize
+
+\bar under
+Agglomerative
+\bar default
+: Start with n points, merge 2 closest clusters using some measure, such
+ as: Single-link (closest pair), Complete-link (furthest pair), Average-link
+ (average of all pairs), Centroid (centroid distance).
+\begin_inset Newline newline
+\end_inset
+
+ Note: SL and CL are sensitive to outliers.
+\end_layout
+
+\begin_layout Itemize
+
+\bar under
+Divisive
+\bar default
+: Start with single cluster, recursively divide clusters into 2 subclusters.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Partitioning
+\series default
+: Partition the data into a K mutually exclusive exhaustive groups (i.e.
+ encode k=C(i)).
+ Iteratively reallocate to minimize some loss function.
+ Finding the correct partitions is hard.
+ Use a greedy algorithm called K-means (coordinate decent).
+ Loss function is non-convex thus we find local minima.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+K-means
+\series default
+: Choose clusters at random, calculate centroid of each cluster, reallocate
+ objects to nearest centroid, repeat.
+ 
+\bar under
+Works with: spherical, well-separated clusters of similar volumes and count.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+K-means
+\series default
+++: Initialize clusters one by one.
+ D(x) = distance of point x to nearest cluster.
+ Pr(x is new cluster center)
+\begin_inset Formula $\propto D(x)^{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+K-medians
+\series default
+: Works with arbitrary distance/dissimilarity metric, the centers 
+\begin_inset Formula $\mu_{k}$
+\end_inset
+
+ are represented by data points.
+ Is more restrictive thus has higher loss.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+General Loss
+\series default
+: 
+\begin_inset Formula $\sum_{n=1}^{N}\sum_{k=1}^{K}d(x_{n},\mu_{k})r_{nk}$
+\end_inset
+
+ where 
+\begin_inset Formula $r_{nk}=1$
+\end_inset
+
+ if 
+\begin_inset Formula $x_{n}$
+\end_inset
+
+ is in cluster k, and 0 o.w.
+\end_layout
+
+\begin_layout Subsection
+Vector Quantization
+\end_layout
+
+\begin_layout Standard
+Use clustering to find representative prototype vectors, which are used
+ to simplify representations of signals.
+\end_layout
+
+\begin_layout Subsection
+Parametric Density Estimation
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Mixture Models.
+
+\series default
+ Assume PDF is made up of multiple gaussians with different centers.
+ 
+\begin_inset Formula $P(x)=\sum_{i=1}^{n_{c}}P(c_{i})P(x|c_{i})$
+\end_inset
+
+ with objective function as log likelihood of data.
+ Use 
+\series bold
+EM
+\series default
+ to estimate this model.
+ 
+\begin_inset Newline newline
+\end_inset
+
+E Step: 
+\begin_inset Formula $P(\mu_{i}|x_{k})=\frac{P(\mu_{i})P(x_{k}|\mu_{i})}{\sum_{j}P(\mu_{j})P(x_{j}|\mu_{j})}$
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+M Step: 
+\begin_inset Formula $P(c_{i})=\frac{1}{n_{e}}\sum_{k=1}^{n_{e}}P(\mu_{i}|x_{k})$
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\mu_{i}=\frac{\sum_{k}x_{k}P(\mu_{i}|x_{k})}{\sum_{k}P(\mu_{i}|x_{k})}$
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\sigma_{i}^{2}=\frac{\sum_{k}(x_{k}-\mu_{i})^{2}P(\mu_{i}|x_{k})}{\sum_{k}P(\mu_{i}|x_{k})}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+Non-parametric Density Estimation
+\end_layout
+
+\begin_layout Standard
+Can use 
+\series bold
+Histogram
+\series default
+ or Kernel Density Estimation (KDE).
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+KDE
+\series default
+: 
+\begin_inset Formula $P(x)=\frac{1}{n}\sum K({\bf x}-{\bf x_{i}})$
+\end_inset
+
+ is a function of the data.
+\end_layout
+
+\begin_layout Standard
+The kernel K has the following properties:
+\begin_inset Newline newline
+\end_inset
+
+Symmetric, Normalized 
+\begin_inset Formula $\int_{\mathbb{R}^{d}}K(x)dx=1$
+\end_inset
+
+, and 
+\begin_inset Formula $\lim_{||x||\rightarrow\infty}||x||^{d}K(x)=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The 
+\bar under
+bandwidth
+\bar default
+ is the width of the kernel function.
+ Too small = jagged results, too large = smoothed out results.
+\end_layout
+
+\begin_layout Subsection
+
+\series bold
+Principal Component Analysis
+\end_layout
+
+\begin_layout Standard
+First run 
+\series bold
+singular value decomposition
+\series default
+ on
+\series bold
+ 
+\series default
+pattern matrix 
+\begin_inset Formula $X$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Enumerate
+Subtract mean from each point
+\end_layout
+
+\begin_layout Enumerate
+(Sometimes) scale each dimension by its variance
+\end_layout
+
+\begin_layout Enumerate
+Compute covariance 
+\begin_inset Formula $\Sigma=X^{T}X$
+\end_inset
+
+ (must be symmetric)
+\end_layout
+
+\begin_layout Enumerate
+Compute eigenvectors/values 
+\begin_inset Formula $\Sigma=VSV^{\intercal}$
+\end_inset
+
+ (spectral thm)
+\end_layout
+
+\begin_layout Enumerate
+Get back 
+\begin_inset Formula $X=X\Sigma=(XV)SV^{\intercal}=USV^{\intercal}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $S$
+\end_inset
+
+ contains the eigenvalues of the transformed features.
+ The larger the 
+\begin_inset Formula $S_{ii}$
+\end_inset
+
+, the larger the variance of that feature.
+ We want the 
+\begin_inset Formula $k$
+\end_inset
+
+ largest features, so we find the indices of the 
+\begin_inset Formula $k$
+\end_inset
+
+ largest items in 
+\begin_inset Formula $S$
+\end_inset
+
+ and we keep only these entries in 
+\begin_inset Formula $U$
+\end_inset
+
+ and 
+\begin_inset Formula $V$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{multicols}
+\end_layout
 
 \end_inset
 
@@ -1837,16 +2296,1559 @@ status open
 
 
 \backslash
-mytitle{CS 189 Final Note Minicards}
+mytitle{CS 189 ALL OF IT}{Che Yeon, Chloe, Dhruv, Li, Sean}
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-begin{center}Che Yeon // Li // Sean
+begin{multicols}{4}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Past Exam Questions
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
 \backslash
-end{center}
+bgroup
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand
+\backslash
+theenumi{(
+\backslash
+alph{enumi})}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand
+\backslash
+labelenumi{
+\backslash
+theenumi}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Spring 2013 Midterm
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ In SVMs, we maximize 
+\begin_inset Formula $\frac{\left\Vert w\right\Vert ^{2}}{2}$
+\end_inset
+
+ subject to the margin constraints.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ In kernelized SVMS, the kernel matrix 
+\begin_inset Formula $K$
+\end_inset
+
+ has to be positive definite.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ If two random variables are independent, then they have to be uncorrelated.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ Isocontours of Gaussian distributions have axes whose lengths are proportional
+ to the eigenvalues of the covariance matrix.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ The RBF kernel 
+\begin_inset Formula $K\left(x_{i},x_{j}\right)=\exp\left(-\gamma\left\Vert x_{i}-x_{j}\right\Vert ^{2}\right)$
+\end_inset
+
+ corresponds to an infinite dimensional mapping of the feature vectors.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ If 
+\begin_inset Formula $(X,Y)$
+\end_inset
+
+ are jointly Gaussian, then 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+ are also Gaussian distributed.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ A function f(x,y,z) is convex if the Hessian of f is positive semi-definite.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ In a least-squares linear regression problem, adding an L2 regularization
+ penalty cannot decrease the L2 error of the solution w on the training
+ data.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ In linear SVMs, the optimal weight vector w is a linear combination of
+ training data points.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ In stochastic gradient descent, we take steps in the exact direction of
+ the gradient vector.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ In a two class problem when the class conditionals 
+\begin_inset Formula $P\left[x\mid y=0\right]andP\left[x\mid y=1\right]$
+\end_inset
+
+ are modeled as Gaussians with different covariance matrices, the posterior
+ probabilities turn out to be logistic functions.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ The perceptron training procedure is guaranteed to converge if the two
+ classes are linearly separable.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ The maximum likelihood estimate for the variance of a univariate Gaussian
+ is unbiased.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ In linear regression, using an L1 regularization penalty term results in
+ sparser solutions than using an L2 regularization penalty term.
+ 
+\end_layout
+
+\begin_layout Subsection
+Spring 2013 Final
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ Solving a non linear separation problem with a hard margin Kernelized SVM
+ (Gaussian RBF Kernel) might lead to overfitting.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ In SVMs, the sum of the Lagrange multipliers corresponding to the positive
+ examples is equal to the sum of the Lagrange multipliers corresponding
+ to the negative examples.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ SVMs directly give us the posterior probabilities 
+\begin_inset Formula $\mathrm{P}\left(y=1\mid x\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{P}\left(y=−1\mid x\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ 
+\begin_inset Formula $V(X)=\mathrm{E}[X]^{2}−\mathrm{E}[X^{2}]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ In the discriminative approach to solving classification problems, we model
+ the conditional probability of the labels given the observations.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ In a two class classification problem, a point on the Bayes optimal decision
+ boundary x* always satisfies 
+\begin_inset Formula $\mathrm{P}\left[y=1\mid x*\right]=\mathrm{P}\left[y=0\mid x*\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ Any linear combination of the components of a multivariate Gaussian is
+ a univariate Gaussian.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ For any two random variables 
+\begin_inset Formula $X\sim N\left(\mu_{1},\sigma_{1}^{2}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $Y\sim\mathcal{N}\left(\mu_{2},\sigma_{2}^{2}\right)$
+\end_inset
+
+ , 
+\begin_inset Formula $X+Y\sim\mathcal{N}\left(\mu_{1}+\mu_{2},\sigma_{1}^{2}+\sigma_{2}^{2}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ For a logistic regression problem differing initialization points can lead
+ to a much better optimum.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ In logistic regression, we model the odds ratio 
+\begin_inset Formula $\frac{p}{1-p}$
+\end_inset
+
+ as a linear function.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ Random forests can be used to classify infinite dimensional data.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ In boosting we start with a Gaussian weight distribution over the training
+ samples.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ In Adaboost, the error of each hypothesis is calculated by the ratio of
+ misclassified examples to the total number of examples.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ When 
+\begin_inset Formula $k=1$
+\end_inset
+
+ and 
+\begin_inset Formula $N\rightarrow\infty$
+\end_inset
+
+, the kNN classification rate is bounded above by twice the Bayes error
+ rate.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ A single layer neural network with a sigmoid activation for binary classificati
+on with the cross entropy loss is exactly equivalent to logistic regression.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ Convolution is a linear operation i.e.
+ 
+\begin_inset Formula $\left(\alpha f_{1}+\beta f_{2}\right)\ast g=\alpha f_{1}\ast g+\beta f_{2}\ast g$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ The k-means algorithm does coordinate descent on a non-convex objective
+ function.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ A 1-NN classifier has higher variance than a 3-NN classifier.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ The single link agglomerative clustering algorithm groups two clusters
+ on the basis of the maximum distance between points in the two clusters.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ The largest eigenvector of the covariance matrix is the direction of minimum
+ variance in the data.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ The eigenvectors of 
+\begin_inset Formula $AA^{T}$
+\end_inset
+
+ and 
+\begin_inset Formula $A^{T}A$
+\end_inset
+
+ are the same.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ The non-zero eigenvalues of 
+\begin_inset Formula $AA^{T}$
+\end_inset
+
+ and 
+\begin_inset Formula $A^{T}A$
+\end_inset
+
+ are the same.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Phantom Phantom
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+In linear regression, the irreducible error is 
+\bar under
+
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+
+\bar default
+ and 
+\begin_inset Formula $\boxed{E\left[\left(y-\mathrm{E}(y\mid x)\right)^{^{2}}\right]}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $S_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $S_{2}$
+\end_inset
+
+ be the support vectors for 
+\begin_inset Formula $w_{1}$
+\end_inset
+
+ (hard margin) and 
+\begin_inset Formula $w_{2}$
+\end_inset
+
+ (soft margin).
+ Then 
+\bar under
+
+\begin_inset Formula $S_{1}$
+\end_inset
+
+ may not be a subset of 
+\begin_inset Formula $S_{2}$
+\end_inset
+
+
+\bar default
+ and 
+\bar under
+
+\begin_inset Formula $w_{1}$
+\end_inset
+
+ may not be equal to 
+\begin_inset Formula $w_{2}$
+\end_inset
+
+
+\bar default
+.
+\end_layout
+
+\begin_layout Enumerate
+Ordinary least square regression assumes each data point is generated according
+ to a linear function of the input plus 
+\begin_inset Formula $\mathcal{N}(0,\sigma)$
+\end_inset
+
+ noise.
+ In many systems, the noise variance is a positive linear function of the
+ input.
+ In this case, the probability model that describes this situation is 
+\begin_inset Formula $\boxed{\ensuremath{P(y|x)=\frac{1}{\sigma\sqrt{2\pi x}}\exp(-\frac{(y-(w_{0}+w_{1}x))^{2}}{2x\sigma^{2}}}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Averaging the outputs of multiple decision trees helps 
+\bar under
+reduce variance
+\bar default
+.
+\end_layout
+
+\begin_layout Enumerate
+The following loss functions are convex: 
+\bar under
+logistic
+\bar default
+, 
+\bar under
+hinge
+\bar default
+, 
+\bar under
+exponential
+\bar default
+.
+ 
+\bar under
+Misclassification loss is not.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+Bias will be smaller
+\bar default
+ and 
+\bar under
+variance will be larger
+\bar default
+ for trees of 
+\bar under
+smaller depth
+\bar default
+.
+\end_layout
+
+\begin_layout Enumerate
+If making a tree with 
+\begin_inset Formula $k$
+\end_inset
+
+-ary splits, 
+\bar under
+the algorithm will prefer high values of 
+\begin_inset Formula $k$
+\end_inset
+
+
+\bar default
+ and 
+\bar under
+there will be 
+\begin_inset Formula $k-1$
+\end_inset
+
+ thresholds for a 
+\begin_inset Formula $k$
+\end_inset
+
+-ary split
+\bar default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+columnbreak
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Spring 2014 Final
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ The singular value decomposition of a real matrix is unique.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ A multiple-layer neural network with linear activation functions is equivalent
+ to one single-layer perceptron that uses the same error function on the
+ output layer and has the same number of inputs.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ The maximum likelihood estimator for the parameter 
+\begin_inset Formula $\theta$
+\end_inset
+
+ of a uniform distribution over 
+\begin_inset Formula $[0,\theta]$
+\end_inset
+
+ is unbiased.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ The k-means algorithm for clustering is guaranteed to converge to a local
+ optimum.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ Increasing the depth of a decision tree cannot increase its training error.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ There exists a one-to-one feature mapping 
+\begin_inset Formula $\phi$
+\end_inset
+
+ for every valid kernel k.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ For high-dimensional data data, k-d trees can be slower than brute force
+ nearest neighbor search.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ If we had infinite data and infinitely fast computers, kNN would be the
+ only algorithm we would study in CS 189.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ For datasets with high label noise (many data points with incorrect labels,
+ random forests would generally perform better than boosted decision trees.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Phantom Phantom
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+In Homework 4, you fit a logistic regression model on spam and ham data
+ for a Kaggle Comp.
+ Assume you had a very good score on the public test set, but when the GSIs
+ ran your model on a private test set, your score dropped a lot.
+ This is likely because you overfitted by submitting multiple times and
+ changing the following between submiss
+\bar under
+ions: 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, your penalty term
+\bar default
+; 
+\bar under
+
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+, your convergence criterion
+\bar default
+; 
+\bar under
+your step size
+\bar default
+; 
+\bar under
+fixing a random bug
+\bar default
+.
+\end_layout
+
+\begin_layout Enumerate
+Given 
+\begin_inset Formula $d$
+\end_inset
+
+-dimensional data 
+\begin_inset Formula $\{x_{i}\}_{i=1}^{N}$
+\end_inset
+
+ , you run principal component analysis and pick 
+\begin_inset Formula $P$
+\end_inset
+
+ principal components.
+ Can you always reconstruct any data point 
+\emph on
+
+\begin_inset Formula $x_{i}$
+\end_inset
+
+
+\emph default
+ for 
+\begin_inset Formula $i$
+\end_inset
+
+ from 
+\begin_inset Formula $1$
+\end_inset
+
+ to 
+\begin_inset Formula $N$
+\end_inset
+
+ from the 
+\begin_inset Formula $P$
+\end_inset
+
+ principal components with zero reconstruction error? 
+\bar under
+Yes, if 
+\begin_inset Formula $P=d$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Putting a standard Gaussian prior on the weights for linear regression 
+\begin_inset Formula $(w\sim N(0,I))$
+\end_inset
+
+ will result in what type of posterior distribution on the weights? 
+\bar under
+Gaussian.
+\end_layout
+
+\begin_layout Enumerate
+Suppose we have 
+\begin_inset Formula $N$
+\end_inset
+
+ instances of d-dimensional data.
+ Let 
+\begin_inset Formula $h$
+\end_inset
+
+ be the amount of data storage necessary for a histogram with a fixed number
+ of ticks per axis, and let 
+\begin_inset Formula $k$
+\end_inset
+
+ be the amount of data storage necessary for kernel density estimation.
+ Which of the following is true about 
+\begin_inset Formula $h$
+\end_inset
+
+ and 
+\begin_inset Formula $k$
+\end_inset
+
+? 
+\bar under
+
+\begin_inset Formula $h$
+\end_inset
+
+ grows exponentially with 
+\bar default
+
+\begin_inset Formula $d$
+\end_inset
+
+, and 
+\bar under
+
+\begin_inset Formula $k$
+\end_inset
+
+ grows linearly with 
+\begin_inset Formula $N$
+\end_inset
+
+
+\bar default
+.
+\end_layout
+
+\begin_layout Enumerate
+John just trained a decision tree for a digit recognition.
+ He notices an extremely low training error, but an abnormally large test
+ error.
+ He also notices that an SVM with a linear kernel performs much better than
+ his tree.
+ What could be the cause of his problem? 
+\bar under
+Decision tree is too deep
+\bar default
+; 
+\bar under
+decision tree is overfitting
+\bar default
+.
+\end_layout
+
+\begin_layout Enumerate
+John has now switched to multilayer neural networks and notices that the
+ training error is going down and converges to a local minimum.
+ Then when he test on the new data, the test error is abnormally high.
+ What is probably going wrong and what do you recommend him to do? 
+\bar under
+The training data size is not large enough so collect a larger training
+ data and retain it
+\bar default
+; 
+\bar under
+play with learning rate and add regularization term to objective function
+\bar default
+; 
+\bar under
+use a different initialization and train the network several times and use
+ the average of predictions from all nets to predict test data
+\bar default
+; 
+\bar under
+use the same training data but use less hidden layers
+\bar default
+.
+\end_layout
+
+\begin_layout Subsection
+Spring 2015 Midterm
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ If the data is not linearly separable, there is no solution to hard margin
+ SVM.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ logistic regression can be used for classification.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ Two ways to prevent beta vectors from getting too large are to use a small
+ step size and use a small regularization value
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ The L2 norm is often used because it produces sparse results, as opposed
+ to the L1 norm which does not
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ For multivariate gaussian, the eigenvalues of the covariance matrix are
+ inversely proportional to the lengths of the ellipsoid axes that determine
+ the isocontours of the density.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ In a generative binary classification model where we assume the class condition
+als are distributed as poisson and the class priors are bernoulli, the posterior
+ assumes a logistic form.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ MLE gives us not only a point estimate, but a distribution over the parameters
+ we are estimating.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ Penalized MLE and bayesian estimators for parameters are better used in
+ the setting of low-dimensional data with many training examples
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ It is not good machine learning practice to use the test set to help adjust
+ the hyperparameters
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ a symmetric positive semidefinite matrix always has nonnegative elements.
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ for a valid kernel function k, the corresponding feature mapping can map
+ a finite dimensional vector to an infinite dimensional vector
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+False:
+\bar default
+ the more features we use, the better our learning algorithm will generalize
+ to new data points.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ a discriminative classifier explicitly models 
+\begin_inset Formula $\mathrm{P}\left(Y\mid X\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Phantom Phantom
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+You can use kernels with 
+\bar under
+SVM
+\bar default
+ and 
+\bar under
+perceptron
+\bar default
+.
+\end_layout
+
+\begin_layout Enumerate
+Cross validation is used to select hyperparameters.
+ It prevents overfitting, but is not guaranteed to prevent it.
+\end_layout
+
+\begin_layout Enumerate
+L2 regularization is equivalent to imposing a Gaussian prior in linear regressio
+n.
+\end_layout
+
+\begin_layout Enumerate
+If we have 2 two-dimensional Gaussians, the same covariance matrix for both
+ will result in a linear decision boundary.
+\end_layout
+
+\begin_layout Enumerate
+The normal equations can be derived from minimizing empirical risk, assuming
+ normally distributed noise, and assuming 
+\begin_inset Formula $\mathrm{P}(Y\mid X)$
+\end_inset
+
+ is distributed normally with mean $B^Tx$ and variance 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Logistic regression can be motivated from 
+\bar under
+log odds equated to an affine function of x
+\bar default
+ and 
+\bar under
+generative models with gaussian class conditionals
+\bar default
+.
+\end_layout
+
+\begin_layout Enumerate
+The perceptron algorithm will converge 
+\bar under
+only if the data is linearly separable
+\bar default
+.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ Newton's method is typically more expensive to calculate than gradient
+ descent per iteration.
+\bar under
+
+\begin_inset Newline newline
+\end_inset
+
+True:
+\bar default
+ for quadratic equations, Newton's method typically requires fewer iterations
+ than gradient descent.
+\bar under
+
+\begin_inset Newline newline
+\end_inset
+
+False:
+\bar default
+ Gradient descent can be viewed as iteratively reweighted least squares.
+\end_layout
+
+\begin_layout Enumerate
+
+\bar under
+True:
+\bar default
+ Complementary slackness implies that every training point that is misclassified
+ by a soft margin SVM is a support vector.
+\bar under
+
+\begin_inset Newline newline
+\end_inset
+
+True:
+\bar default
+ When we solve the SVM with the dual problem, we need only the dot product
+ of 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{j}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+, 
+\begin_inset Formula $j$
+\end_inset
+
+.
+\bar under
+
+\begin_inset Newline newline
+\end_inset
+
+True:
+\bar default
+ we use Lagrange multipliers in an optimization problem with inequality
+ constraints.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\left\Vert \Phi(x)-\Phi(y)\right\Vert _{2}^{2}$
+\end_inset
+
+ can be computed exclusively with inner products.
+\begin_inset Newline newline
+\end_inset
+
+But not 
+\begin_inset Formula $\left\Vert \Phi(x)-\Phi(y)\right\Vert _{1}$
+\end_inset
+
+ norm or 
+\begin_inset Formula $\Phi(x)-\Phi(y)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Strong duality holds for 
+\bar under
+hard and soft margin SVM
+\bar default
+, but 
+\bar under
+not constrained optimization problems
+\bar default
+ in general.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+columnbreak
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Discussion Problems
+\end_layout
+
+\begin_layout Subsection
+Discussion 9 -- Entropy
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename graphics/disc09-entropy-1.pdf
+	width 97col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Discussion 11 -- Skip-Layer NN
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename graphics/disc10-skipnn-1.pdf
+	width 97col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename graphics/disc10-skipnn-2.pdf
+	width 97col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Discussion 12 -- PCA
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename graphics/disc12-pca-1.pdf
+	width 97col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename graphics/disc12-pca-2.pdf
+	width 97col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename graphics/disc12-pca-3.pdf
+	width 97col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename graphics/disc12-pca-4.pdf
+	width 97col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+egroup
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+columnbreak
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Minicards
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 1
+use_makebox 0
+width "97col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+Gaussian distribution
+\series default
+ [7, 8]
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula $1$
+\end_inset
+
+-var (normal): 
+\begin_inset Formula $p(x)=\ensuremath{\frac{1}{\sigma\sqrt{2\pi}}\exp\left(-\frac{\left(x-\mu\right)^{2}}{2\sigma^{2}}\right)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Multivar: 
+\begin_inset Formula $p(x)=\frac{1}{\sqrt{\left|\Sigma\right|}\sqrt{2\pi}^{d}}\exp\left(-\frac{1}{2}\left(x-\mu\right)^{\intercal}\Sigma^{-1}\left(x-\mu\right)\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0.5ex"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+covariance
+\series default
+ 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+ of variables 
+\begin_inset Formula $X$
+\end_inset
+
+ is a matrix such that each entry 
+\begin_inset Formula $\Sigma_{ij}=\mathrm{Cov}(X_{i},X_{j})$
+\end_inset
+
+.
+ This means that the diagonal entries 
+\begin_inset Formula $\Sigma_{ii}=\mathrm{Var}(X_{i})$
+\end_inset
+
+.
+ If the matrix is diagonal, then the non-diagonal entries are zero, which
+ means all the variables 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ are independent.
+\end_layout
+
+\begin_layout Standard
+It's nice to have independent variables, so we try to diagonalize non-diagonal
+ covariances.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 1
+use_makebox 0
+width "97col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+Spectral Theorem 
+\series default
+[7:23]
+\end_layout
+
+\begin_layout Enumerate
+Take definition of eigenvalue/vector: 
+\begin_inset Formula $Ax=\lambda x$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Pack multiple eigenvalues into 
+\begin_inset Formula $\Lambda=\mathrm{diag}\left(\lambda_{1},\lambda_{2},\ldots,\lambda_{n}\right)$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $n$
+\end_inset
+
+ eigenvalues exist iff 
+\begin_inset Formula $A$
+\end_inset
+
+ is symmetric.
+\end_layout
+
+\begin_layout Enumerate
+Pack multiple eigenvectors into 
+\begin_inset Formula $U=\left[x_{1}\ x_{2}\ \ldots\ x_{n}\right]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Rewrite equation using these: 
+\begin_inset Formula $\boxed{AU=U\Lambda\longrightarrow A=U\Lambda U'}$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+We can use this to diagonalize a symmetric 
+\begin_inset Formula $A$
+\end_inset
+
+.
 \end_layout
 
 \end_inset
@@ -1872,32 +3874,32 @@ height "1pt"
 SVM-like classifiers
 \series default
  work with a 
-\emph on
+\bar under
 boundary
-\emph default
+\bar default
 , a hyperplane (a line for 2D data) that separates two classes.
  
-\emph on
+\bar under
 Support vectors
-\emph default
+\bar default
  are the point(s) closest to the boundary.
  
 \begin_inset Formula $\gamma$
 \end_inset
 
  is the 
-\emph on
+\bar under
 margin
-\emph default
+\bar default
 , the distance between the boundary and the support vector(s).
  The 
-\emph on
+\bar under
 parameter 
 \begin_inset Formula $\theta$
 \end_inset
 
 
-\emph default
+\bar default
  is a vector.
  
 \begin_inset Formula $\boxed{\theta\cdot x}$
@@ -1985,32 +3987,32 @@ Perceptron
 
 \begin_layout Plain Layout
 
-\emph on
+\bar under
 Overfits
-\emph default
+\bar default
  when outliers skew the boundary.
-
-\emph on
- Converges
-\emph default
+ 
+\bar under
+Converges
+\bar default
  iff separable.
 \end_layout
 
 \begin_layout Plain Layout
 
-\emph on
+\bar under
 Batch eqn
-\emph default
+\bar default
  
 \begin_inset Formula $\theta\cdot x=\sum_{i}\alpha^{i}y^{i}x^{i}\cdot x$
 \end_inset
 
-,
+: 
 \begin_inset Newline newline
 \end_inset
 
-where 
-\begin_inset Formula $\alpha=\text{\# times point was misclassified}$
+ 
+\begin_inset Formula $\alpha_{i}=\text{\# times point \emph{i} was misclassified}$
 \end_inset
 
 
@@ -2059,25 +4061,25 @@ Hard-margin SVM
 Sometimes removing a few outliers lets us find a much higher margin or a
  margin at all.
  Hard-margin 
-\emph on
+\bar under
 overfits
-\emph default
+\bar default
  by not seeing this.
 \end_layout
 
 \begin_layout Plain Layout
 
-\emph on
+\bar under
 Converges
-\emph default
+\bar default
  iff separable.
 \end_layout
 
 \begin_layout Plain Layout
 
-\emph on
+\bar under
 Batch eqn
-\emph default
+\bar default
  
 \begin_inset Formula $\theta=\sum_{i}\alpha^{i}y^{i}x^{i}$
 \end_inset
@@ -2128,9 +4130,9 @@ Soft-margin SVM
 
 \begin_layout Plain Layout
 
-\emph on
+\bar under
 Hyperparameter
-\emph default
+\bar default
  
 \begin_inset Formula $C$
 \end_inset
@@ -2145,9 +4147,9 @@ Hyperparameter
 
 \begin_layout Plain Layout
 
-\emph on
+\bar under
 Overfits
-\emph default
+\bar default
  on less data, more features, higher 
 \begin_inset Formula $C$
 \end_inset
@@ -2158,100 +4160,6 @@ Overfits
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset line
-LatexCommand rule
-offset "0.5ex"
-width "100col%"
-height "1pt"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Regression
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-\begin_inset Box Boxed
-position "t"
-hor_pos "c"
-has_inner_box 1
-inner_pos "t"
-use_parbox 1
-use_makebox 0
-width "97col%"
-special "none"
-height "1in"
-height_special "totalheight"
-status open
-
-\begin_layout Plain Layout
-
-\series bold
-Linear regression
-\series default
- [9:7]
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-\begin_inset Box Boxed
-position "t"
-hor_pos "c"
-has_inner_box 1
-inner_pos "t"
-use_parbox 1
-use_makebox 0
-width "97col%"
-special "none"
-height "1in"
-height_special "totalheight"
-status open
-
-\begin_layout Plain Layout
-
-\series bold
-Lasso vs ridge regression
-\end_layout
-
-\begin_layout Plain Layout
-which one yields sparse results?
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-columnbreak
-\end_layout
-
-\end_inset
-
- 
 \end_layout
 
 \begin_layout Standard
@@ -2318,9 +4226,9 @@ closest
 
 \begin_layout Plain Layout
 
-\emph on
+\bar under
 Hyperparameter
-\emph default
+\bar default
  
 \begin_inset Formula $k$
 \end_inset
@@ -2346,9 +4254,9 @@ Closest
 
 \begin_layout Plain Layout
 
-\emph on
+\bar under
 Overfits
-\emph default
+\bar default
  when 
 \begin_inset Formula $k$
 \end_inset
@@ -2389,9 +4297,9 @@ Decision trees
 \end_inset
 
 
-\emph on
+\bar under
 Hyperparameters
-\emph default
+\bar default
  typically restrict complexity (max tree depth, min points at node) or penalize
  it.
  One particular one of interest is 
@@ -2403,9 +4311,9 @@ Hyperparameters
 
 \begin_layout Plain Layout
 
-\emph on
+\bar under
 Overfits
-\emph default
+\bar default
  when tree is deep or when we are allowed to split on a very small number
  of items.
 \end_layout
@@ -2421,9 +4329,9 @@ Bagging
 
 \begin_layout Plain Layout
 
-\emph on
+\bar under
 Hyperparameters
-\emph default
+\bar default
  # trees, proportion of items to subset.
 \end_layout
 
@@ -2438,9 +4346,9 @@ Random forests
 
 \begin_layout Plain Layout
 
-\emph on
+\bar under
 Hyperparameters
-\emph default
+\bar default
  proportion of features to consider.
 \end_layout
 
@@ -2476,21 +4384,17 @@ AdaBoost
  of the second algorithm, and so on.
 \end_layout
 
-\begin_layout Labeling
-\labelwidthstring *
+\begin_layout Plain Layout
 \noindent
 * For regression, train the new learner on the errors.
-\begin_inset Newline newline
-\end_inset
-
-For classification, give misclassified items more weight.
+ For classification, give misclassified items more weight.
 \end_layout
 
 \begin_layout Plain Layout
 
-\emph on
+\bar under
 Hyperparameters
-\emph default
+\bar default
  
 \begin_inset Formula $B$
 \end_inset
@@ -2508,78 +4412,10 @@ Hyperparameters
 \end_layout
 
 \begin_layout Standard
-\begin_inset CommandInset line
-LatexCommand rule
-offset "0.5ex"
-width "100col%"
-height "1pt"
-
+\begin_inset VSpace vfill
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-columnbreak
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Things to do
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-\begin_inset Box Boxed
-position "t"
-hor_pos "c"
-has_inner_box 1
-inner_pos "t"
-use_parbox 1
-use_makebox 0
-width "97col%"
-special "none"
-height "1in"
-height_special "totalheight"
-status open
-
-\begin_layout Plain Layout
-
-\series bold
-Spectral Theorem
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-generative vs discriminative
-\end_layout
-
-\begin_layout Itemize
-estimating post vs prior
-\end_layout
-
-\begin_layout Itemize
-early slides
-\end_layout
-
-\begin_layout Itemize
-cry
 \end_layout
 
 \begin_layout Standard

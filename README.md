@@ -1,6 +1,5 @@
-EECSsheets
-===============
-CS 189 - Machine Learning
+CS 189 Machine Learning Cheat Sheet
+===================================
 
-
-More cheat sheets to come, I presume
+[189-cheat-sheet-minicards.pdf](189-cheat-sheet-minicards.pdf)  
+[189-cheat-sheet-nominicards.pdf](189-cheat-sheet-nominicards.pdf)  
