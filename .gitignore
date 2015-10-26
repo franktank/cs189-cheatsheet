@@ -1,7 +1,7 @@
 *.aux
+*.fdb_latexmk
 *.gz
 *.log
 *.out
-*.pdf
-*.fdb_latexmk
-*.DS_Store
+.DS_Store
+.pdf
