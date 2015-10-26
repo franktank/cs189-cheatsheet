@@ -327,7 +327,7 @@ To deal with saddle points, perturb modes and prune by taking the highest mode.\
 \columnbreak
 \subsection{Neural Networks}
 Neural Nets explore what you can do by combining perceptrons, each of which is a simple linear classifier. We use a soft threshold for each activation function $\theta$ because it is twice differentiable.
-\includegraphics[scale=0.31]{NN.pdf} \ \includegraphics[scale=0.2]{NN2.pdf}
+\includegraphics[scale=0.31]{graphics/NN.pdf} \ \includegraphics[scale=0.2]{graphics/NN2.pdf}
 {\bf Activation Functions:}\\[4pt]
 \ \ \ \(\theta(s) = \operatorname{tanh}(s) = \frac{e^s-e^{-s}}{e^s+e^{-s}} \implies \theta'(s) = 1 - \theta^2(s)\)\\[4pt]
 \ \ \ \(\theta(s) = \sigma(s) = \frac{1}{1+e^{-s}} \implies \theta'(s) = \sigma(s)(1-\sigma(s))\)\\[4pt]
@@ -349,7 +349,7 @@ Neural Nets explore what you can do by combining perceptrons, each of which is a
 Final Layer: \(\delta_j^{(L)} = \frac{\partial e(w)}{\partial s_{j}^{(l)}} = \frac{\partial e(w)}{\partial x_j^{(L)}} \frac{\partial x_j^{(L)}}{\partial s_j^{(L)}} = e'(x_j^{(L)}) \theta_{out}'(s_j^{L})\) \\
 \begin{eqnarray*} \text{General: } \delta_i^{(l-1)} = \frac{\partial e(w)}{\partial s_{i}^{(l-1)}} &=& \sum_{j=1}^{d^{(l)}} \frac{\partial e(w)}{\partial s_{j}^{(l)}} \times \frac{\partial s_{j}^{(l)}}{\partial x_i^{(l-1)}} \times \frac{\partial x_i^{(l-1)}}{\partial s_i^{(l-1)}} \\
 &=&  \sum_{j=1}^{d^{(l)}} \delta_j^{(l)} \times w_{ij}^{(l)} \times \theta'(s_i^{(l-1)}) \end{eqnarray*}
-\includegraphics[scale=0.28]{NN1.pdf}
+\includegraphics[scale=0.28]{graphics/NN1.pdf}
 
 %$W^{(l)} = W^{(l)} - \eta x^{(l-1)}(\delta^{(l)})^T$\\
 %$b^{(l)} = b^{(l)} + \eta\delta^{(l)}$
